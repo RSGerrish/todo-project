@@ -8,3 +8,5 @@ class todo {
     this.checked = checked;
   }
 }
+
+export default todo;

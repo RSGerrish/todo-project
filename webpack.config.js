@@ -8,7 +8,9 @@ module.exports = {
     header: './src/modules/header.js',
     sidebar: './src/modules/sidebar.js',
     footer: './src/modules/footer.js',
-    todobody: '.src/modules/body.js',
+    todobody: './src/modules/body.js',
+    todos: './src/modules/todos.js',
+    projects: './src/modules/projects.js',
   },
   plugins: [
     new HtmlWebpackPlugin({

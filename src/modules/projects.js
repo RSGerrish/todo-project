@@ -5,5 +5,15 @@ class project {
     this.todos = todos;
   }
 
-  add
+  addTodo(todo) {
+    this.todos.push(todo);
+    console.log(this);
+  }
+
+  removeTodo(index) {
+    this.todos.splice(index, 1);
+    console.log(this);
+  }
 }
+
+export default project;
