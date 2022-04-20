@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-size: 18px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.body-height {
+  min-height: calc(100vh - 54px - 126px - 2rem);
+}
+
+#body-container {
+  display: flex;
+  min-width: 100%;
+}
+
+.button {
+  width: 5rem;
+  height: 2rem;
+}
+
+/* Header Styling */
+
+header {
+  display: flex;
+  background-color:darkseagreen;
+  padding: 0;
+}
+
+#site-icon {
+  width: 5rem;
+  height: 5rem;
+  position: relative;
+  top: -0.2rem;
+  margin: 1rem 1rem;
+}
+
+#logo-container {
+  margin-top: 1rem;
+}
+
+#logo-first {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-right: 0.7rem;
+}
+
+#logo-second {
+  font-size: 3.5rem;
+  font-weight: 300;
+}
+
+#logo-motto-container {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 300;
+  width: 97%;
+  padding-left: 0.2rem;
+}
+
+/* Sidebar Styling */
+
+#sidebar {
+  background-color: lightsalmon;
+  max-width: 450px;
+  min-width: 300px;
+  padding: 1rem;
+}
+
+#list-title {
+  font-size: 2.2rem;
+}
+
+#list-container {
+  margin: 1rem;
+  margin-bottom: 0;
+  border-radius: 1rem;
+  border: 1px solid black;
+  min-height: 150px;
+}
+
+/* Todo Body Styling */
+#todo-body {
+  min-width: calc(100vw - 336px);
+  text-align: right;
+}
+
+#add-button {
+  margin: 1rem;
+  align-self: flex-end;
+}
+
+/* Footer Styling */
+footer {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  background-color:darkkhaki;
+}
