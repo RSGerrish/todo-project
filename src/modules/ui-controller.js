@@ -2,8 +2,8 @@ const uiController = () => {
 
   const addDisplayProjectEvent = (project, element) => {
     element.addEventListener("click", function() {
-      console.log(`project: ${project.title}`);
-      displayTodos(project);
+      console.log(`event index: ${event.target.dataset.index}`);
+      displayTodos(project[event.target.dataset.index]);
     })
   }
 
@@ -43,15 +43,14 @@ const uiController = () => {
     projectListContainer.className = "project-list";
     listContainer.appendChild(projectListContainer);
 
-    for (let i=0; i<project.todos.length; i++) {
+    for (let i=0; i < project.length; i++) {
       const projectListItem = document.createElement('li');
       projectListItem.className = 'project-list-item';
       projectListItem.dataset.index = i;
 
-      console.log(`projectList.todos[${i}]: ${project.todos[i]}`)
-      projectListItem.innerHTML = `
-      <h2>${project.todos[i].title}</h2>
-      `;
+      console.log(`projectList.todos[${i}]: ${project[i].title}`)
+      projectListItem.innerHTML = project[i].title;
+      projectListItem.className = "h2-title";
       projectListContainer.appendChild(projectListItem);
       //projectList.todos[i].title
       addDisplayProjectEvent(project, projectListItem);
@@ -60,7 +59,7 @@ const uiController = () => {
 
   }
 
-  return { displayTodos, displayProjects};
+  return { displayTodos, displayProjects };
 }
 
 export default uiController;

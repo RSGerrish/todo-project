@@ -5,8 +5,11 @@ import siteSidebar from './modules/sidebar.js';
 import siteFooter from './modules/footer.js';
 import siteTodoBody from './modules/body.js';
 import todoItem from './modules/todos.js';
-import projectList from './modules/projects.js';
+import projectName from './modules/projects.js';
 import uiController from './modules/ui-controller.js';
+import projectList from './modules/projectlist.js';
+
+let mainProjectList = new projectList;
 
 function drawSite() {
   const siteBody = document.body;
@@ -23,15 +26,26 @@ function drawSite() {
 
 drawSite();
 
-//Creating dumby lists and adding them to a project 'newList'
+//Creating dumby lists and adding them to a project 'newList' and that project to the project list 'projectList'
 const todo1 = new todoItem("Title1", "Description", "Due Date", "Priority", "Notes", false);
 const todo2 = new todoItem("Title2", "Description2", "Due Date2", "Priority2", "Notes2", true);
 const todo3 = new todoItem("Title3", "Description3", "Due Date3", "Priority3", "Notes3", false);
 const todo4 = new todoItem("Title4", "Description4", "Due Date 4", "Priority4", "Notes4", false);
 
-const newList = new projectList("New List", false, [todo1, todo2, todo3]);
+const newList = new projectName("New List", false, [todo1, todo2, todo3]);
 
 newList.addTodo(todo4);
+
+const todo21 = new todoItem("Titler 2-1", "Description deuce", "Due Deuce", "Priority", "Notes", false);
+const todo22 = new todoItem("Titler 2-2", "Deuce Description 2", "Due Deuce 2", "Priority2", "Notes2", true);
+const todo23 = new todoItem("Titler 2-3", "Taking a 3", "Due Due Deuce", "Priority3", "Notes3", false);
+const todo24 = new todoItem("Titler 2-4", "Deucy Deuce 4", "Poop", "Priority4", "Notes4", false);
+
+const newList2 = new projectName("New List2", false, [todo21, todo22, todo23, todo24]);
+
+mainProjectList.add(newList);
+mainProjectList.add(newList2);
+console.log(`projectList: ${mainProjectList.list}`);
 
 //Add event listener to 'ADD' button
 const addBtn = document.querySelector('#add-button');
@@ -58,5 +72,5 @@ addBtn.addEventListener("click", function() {
 //Playing with uiController
 
 const display = uiController();
-console.log(`newList: ${JSON.stringify(newList)}`);
-display.displayProjects(newList);
+console.log(`projectList: ${JSON.stringify(mainProjectList.list)}`);
+display.displayProjects(mainProjectList.list);

@@ -103,8 +103,9 @@ header {
   font-size: 1.5rem;
 }
 
-.project-list-item > h2 {
+.h2-title {
   font-size: 1.8rem;
+  font-weight: 500;
 }
 
 /* Todo Body Styling */

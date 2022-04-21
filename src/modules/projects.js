@@ -1,18 +1,18 @@
+import { add, remove } from "lodash";
+
 class project {
   constructor(title, checked, todos) {
     this.title = title;
     this.checked = checked;
-    this.todos = todos;
+    this.todos = todos; 
   }
 
-  addTodo(todo) {
-    this.todos.push(todo);
-    console.log(this);
+  addTodo(newTodo) {
+    this.todos.push(newTodo);
   }
 
   removeTodo(index) {
     this.todos.splice(index, 1);
-    console.log(this);
   }
 
   getLength() {
