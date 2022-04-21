@@ -11,6 +11,7 @@ module.exports = {
     todobody: './src/modules/body.js',
     todos: './src/modules/todos.js',
     projects: './src/modules/projects.js',
+    uicontroller: './src/modules/ui-controller.js',
   },
   plugins: [
     new HtmlWebpackPlugin({

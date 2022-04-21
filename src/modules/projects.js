@@ -14,6 +14,10 @@ class project {
     this.todos.splice(index, 1);
     console.log(this);
   }
+
+  getLength() {
+    return this.prototype.length;
+  }
 }
 
 export default project;

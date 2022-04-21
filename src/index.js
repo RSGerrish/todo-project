@@ -6,6 +6,7 @@ import siteFooter from './modules/footer.js';
 import siteTodoBody from './modules/body.js';
 import todoItem from './modules/todos.js';
 import projectList from './modules/projects.js';
+import uiController from './modules/ui-controller.js';
 
 function drawSite() {
   const siteBody = document.body;
@@ -36,5 +37,26 @@ newList.addTodo(todo4);
 const addBtn = document.querySelector('#add-button');
 
 addBtn.addEventListener("click", function() {
-  newList.removeTodo(2);
-})
+  const addText = document.querySelector('.add-text-container');
+  const textBox = document.querySelector('.add-text');
+  const addBtn = document.querySelector('#add-button');
+  const moduleContainer = document.querySelector('.module-container');
+
+  if (addText.classList.contains('add-text-container-extend')) {
+    addText.classList.remove('add-text-container-extend');
+    textBox.classList.remove('add-text-extend');
+    moduleContainer.classList.remove('module-container-show');
+    addBtn.innerHTML = "ADD";
+  } else {
+    addText.classList.add('add-text-container-extend');
+    textBox.classList.add('add-text-extend');
+    moduleContainer.classList.add('module-container-show');
+    addBtn.innerHTML = "CANCEL";
+  }
+});
+
+//Playing with uiController
+
+const display = uiController();
+console.log(`newList: ${JSON.stringify(newList)}`);
+display.displayProjects(newList);

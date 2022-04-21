@@ -7,7 +7,7 @@ const sidebar = function() {
   listTitle.innerHTML = "Projects";
   listTitle.id = "list-title";
   const listContainer = document.createElement('ul');
-  listContainer.id = "list-container";
+  listContainer.className = "list-container";
   sidebar.append(listTitle, listContainer);
 
   return sidebar;
