@@ -7,8 +7,9 @@ const uiController = () => {
 
   const addDisplayProjectEvent = (project, element) => {
     element.addEventListener("click", function() {
-      console.log(`event index: ${event.target.dataset.index}`);
-      displayTodos(project.list[event.target.dataset.index]);
+      project.currentIndex = target.dataset.index;
+      console.log(`event index: ${project.currentIndex}`);
+      displayTodos(project.list[project.currentIndex]);
     })
   }
 
@@ -82,7 +83,7 @@ const uiController = () => {
     const todo3 = new todoItem("Trash", "Take out trash and recycling", "04/21/2022", "5", "Trash: grey can, Recycling: green can", false);
     const todo4 = new todoItem("Floors", "Sweep and mop", "04/30/2022", "1", "", false);
 
-    const newList = new projectName("To Do", false, [todo1, todo2, todo3, todo4]);
+    const newList = new projectName("To Do", false, 0, [todo1, todo2, todo3, todo4]);
 
     mainProjectList.add(newList);
 
@@ -105,11 +106,14 @@ const uiController = () => {
 
     addProjectBtn.addEventListener("click", function() {
       if (sideAddText.value) {
-        const newProject = new projectName(sideAddText.value, false, []);
+        const newProject = new projectName(sideAddText.value, false, 0, []);
 
         mainProjectList.add(newProject);
         displayProjects(mainProjectList);
         sideAddText.value = "";
+        const endIndex = mainProjectList.list.length - 1;
+
+        displayTodos(mainProjectList.list[endIndex]);
       }
     })
 

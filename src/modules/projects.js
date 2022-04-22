@@ -1,9 +1,10 @@
 import { add, remove } from "lodash";
 
 class project {
-  constructor(title, checked, todos) {
+  constructor(title, checked, currentIndex, todos) {
     this.title = title;
     this.checked = checked;
+    this.currentIndex = currentIndex;
     this.todos = todos; 
   }
 
