@@ -1,33 +1,38 @@
+import projectList from "./projectlist.js";
+import projectName from "./projects.js";
+import todoItem from './todos.js';
+
 const uiController = () => {
+  let mainProjectList = new projectList;
 
   const addDisplayProjectEvent = (project, element) => {
     element.addEventListener("click", function() {
       console.log(`event index: ${event.target.dataset.index}`);
-      displayTodos(project[event.target.dataset.index]);
+      displayTodos(project.list[event.target.dataset.index]);
     })
   }
 
-  const displayTodos = (project) => {
+  const displayTodos = (projectTodos) => {
     const listContainer = document.querySelector('.todo-list-container');
     const todoList = document.createElement('ol');
 
     listContainer.innerHTML = "";
 
     todoList.className = "todo-list";
-    console.log(`projectName: ${project.title}`);
-    todoList.innerHTML = `<h1>${project.title}</h1>`;
+    console.log(`projectName: ${projectTodos.title}`);
+    todoList.innerHTML = `<h1>${projectTodos.title}</h1>`;
     listContainer.appendChild(todoList);
 
-    for (let i=0; i<project.todos.length; i++) {
+    for (let i=0; i<projectTodos.todos.length; i++) {
       const todoItem = document.createElement('li');
       todoItem.className = "todo-item";
       todoItem.id = `todo-item-${i}`;
       todoItem.innerHTML = `
-      <h2>${project.todos[i].title}</h2>
-      <h4>Due Date: ${project.todos[i].dueDate}</h4>
-      <h4>Priority: ${project.todos[i].priority}</h4>
-      <h3>${project.todos[i].description}</h3>
-      <h5>${project.todos[i].notes}</h5>
+      <h2>${projectTodos.todos[i].title}</h2>
+      <h4>Due Date: ${projectTodos.todos[i].dueDate}</h4>
+      <h4>Priority: ${projectTodos.todos[i].priority}</h4>
+      <h3>${projectTodos.todos[i].description}</h3>
+      <h5>${projectTodos.todos[i].notes}</h5>
 
       `;
       if(i%2===0) {todoItem.style.backgroundColor = "rgb(236, 236, 236)"};
@@ -39,19 +44,18 @@ const uiController = () => {
 
   const displayProjects = (project) => {
     const listContainer = document.querySelector('.list-container');
-    const projectListContainer = document.createElement('ol');
-    projectListContainer.className = "project-list";
-    listContainer.appendChild(projectListContainer);
 
-    for (let i=0; i < project.length; i++) {
+    listContainer.innerHTML = "";
+
+    for (let i=0; i < project.list.length; i++) {
       const projectListItem = document.createElement('li');
       projectListItem.className = 'project-list-item';
       projectListItem.dataset.index = i;
 
-      console.log(`projectList.todos[${i}]: ${project[i].title}`)
-      projectListItem.innerHTML = project[i].title;
+      console.log(`projectList.todos[${i}]: ${project.list[i].title}`)
+      projectListItem.innerHTML = project.list[i].title;
       projectListItem.className = "h2-title";
-      projectListContainer.appendChild(projectListItem);
+      listContainer.appendChild(projectListItem);
       //projectList.todos[i].title
       addDisplayProjectEvent(project, projectListItem);
     }
@@ -59,7 +63,71 @@ const uiController = () => {
 
   }
 
-  return { displayTodos, displayProjects };
+  const initializeUI = (mainList) => {
+    const addText = document.querySelector('.add-text-container');
+    const textBox = document.querySelector('.add-text');
+    const addExtendBtn = document.querySelector('#add-button');
+    const addTodoBtn = document.querySelector('#add-todo-button');
+    const moduleContainer = document.querySelector('.module-container');
+    const todoTitle = document.querySelector('#add-text');
+    const shortDescription = document.querySelector('#desc-text');
+    const dueDate = document.querySelector('#due-text');
+    const completeBool = document.querySelector('#complete-bool');
+    const priorityLevel = document.querySelector('#priority-text');
+    const notesText = document.querySelector('#notes-text');
+
+    //Creating initial todos and adding them to the initial list 'newList' and that project to the project list 'projectList'
+    const todo1 = new todoItem("Laundry", "Wash all the clothes", "04/26/2022", "3", "Separate the whites from the colors!", false);
+    const todo2 = new todoItem("Dishes", "Put dishes through the dishwasher", "04/24/2022", "4", "", true);
+    const todo3 = new todoItem("Trash", "Take out trash and recycling", "04/21/2022", "5", "Trash: grey can, Recycling: green can", false);
+    const todo4 = new todoItem("Floors", "Sweep and mop", "04/30/2022", "1", "", false);
+
+    const newList = new projectName("To Do", false, [todo1, todo2, todo3, todo4]);
+
+    mainProjectList.add(newList);
+
+    addExtendBtn.addEventListener("click", function() {
+      if (addText.classList.contains('add-text-container-extend')) {
+        addText.classList.remove('add-text-container-extend');
+        textBox.classList.remove('add-text-extend');
+        moduleContainer.classList.remove('module-container-show');
+        addExtendBtn.innerHTML = "ADD";
+      } else {
+        addText.classList.add('add-text-container-extend');
+        textBox.classList.add('add-text-extend');
+        moduleContainer.classList.add('module-container-show');
+        addExtendBtn.innerHTML = "CANCEL";
+      }
+    })
+
+    const addProjectBtn = document.querySelector('#side-add-button');
+    const sideAddText = document.querySelector('#side-add-text');
+
+    addProjectBtn.addEventListener("click", function() {
+      if (sideAddText.value) {
+        const newProject = new projectName(sideAddText.value, false, []);
+
+        mainProjectList.add(newProject);
+        displayProjects(mainProjectList);
+        sideAddText.value = "";
+      }
+    })
+
+    addTodoBtn.addEventListener("click", function() {
+      if (todoTitle && shortDescription && dueDate && notesText) {
+        const newTodo = new todoItem(todoTitle.value, shortDescription.value, dueDate.value, completeBool.value, priorityLevel.value, notesText.value);
+        
+        mainProjectList.list[0].add(newTodo); // - start here to begin adding new todos to the current list
+        console.log("added");
+      }
+    })
+
+    displayProjects(mainProjectList);
+
+    displayTodos(mainProjectList.list[0]);
+  }
+
+  return { displayTodos, displayProjects, initializeUI, mainProjectList };
 }
 
 export default uiController;

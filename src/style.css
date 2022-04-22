@@ -84,6 +84,27 @@ header {
 
 #list-title {
   font-size: 2.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.side-add-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.side-add-text {
+  height: 1.7rem;
+  width: calc(100% - 5rem);
+}
+
+#side-add-button {
+  min-width: 2.5rem;
+  margin-right: 1rem;
 }
 
 .list-container {
@@ -92,7 +113,8 @@ header {
   border-radius: 1rem;
   border: 1px solid black;
   min-height: 150px;
-  padding: 0;
+  padding: 2rem;
+  padding-right: 1rem;
 }
 
 .project-list {
@@ -124,16 +146,13 @@ header {
 }
 
 .add-text-container {
-  min-width: 0;
-  visibility: hidden;
-  display: flex;
+  width: calc(100% - 4rem);
+  /* visibility: hidden; */
   align-items: center;
   justify-content:flex-end;
 }
 
 .add-text-container-extend {
-  width: 100%;
-  min-width: 100px;
   visibility: visible;
 }
 
@@ -143,14 +162,14 @@ header {
   width: 0;
   border: 1 solid black;
   visibility: hidden;
-  transition: width 1s ease-in-out;
-  /* transition: width, 2s, ease-out; */
+  transition:  width 0.5s ease-in-out;
+  /* transition: width, 0.5s, ease-out; */
 }
 
 .add-text-extend {
-  width: calc(100% - 4rem);
+  width: calc(100% - 3rem);
   visibility: visible;
-  /* transition: width, 2s, ease-out; */
+  transition: width 0.5s ease-in-out;
 }
 
 #add-button {
@@ -172,22 +191,29 @@ header {
 }
 
 .module-container {
+  margin: 0;
+  padding: 0;
+  border: none;
+  grid-template: 1fr 1fr / 3fr 3fr 1fr;
+  gap: 2rem;
+  display: grid;
+  visibility: hidden;
+  max-height: 0px;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.5s ease-in-out; 
+}
+
+.module-container-show {
+  visibility: visible;
+  max-height: 500px;
   margin: 1rem;
   margin-bottom: 0;
   border-radius: 1rem;
   border: 1px solid black;
-  max-height: 0px;
-  grid-template: 1fr 1fr / 3fr 3fr 1fr;
-  gap: 2rem;
   padding: 1rem;
-  display: none;
-  transition: max-height 1s ease-out;
-}
-
-.module-container-show {
-  display: grid;
-  max-height: 500px;
-  transition: max-height 1s ease-in;
+  opacity: 100%;
+  transition: all 0.5s ease-in-out;
 }
 
 .add-field-container {

@@ -13,19 +13,15 @@ const todobody = function() {
       addText.className = "add-text";
       addText.id = "add-text";
       addText.placeholder = "Task Title";
-//      const plusBtn = document.createElement('button');
-//      plusBtn.innerHTML = "+";
-//      plusBtn.className = "button";
-//      plusBtn.id = "plus-button";
-      const addBtn = document.createElement('button');
       addTextContainer.appendChild(addText);
+    const addBtn = document.createElement('button');
     addBtn.innerHTML = "ADD";
     addBtn.className = "button";
     addBtn.id = "add-button";
     addBtnContainer.append(addTextContainer, addBtn);
   const moduleContainer = document.createElement('div');
   moduleContainer.id = "module-container";
-  moduleContainer.className = "module-container";
+  moduleContainer.classList = "module-container";
     const descDiv = document.createElement('div');
     descDiv.className = "add-field-container";
       const descLabel = document.createElement('label');
@@ -97,6 +93,7 @@ const todobody = function() {
     const subBtn = document.createElement('button');
     subBtn.innerHTML = "ADD";
     subBtn.className = "button";
+    subBtn.id = "add-todo-button";
 
     moduleContainer.append(descDiv, dueDateDiv, completeDiv, priorityDiv, notesDiv, subBtn);
   const listContainer = document.createElement('div');
