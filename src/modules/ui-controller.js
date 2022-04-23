@@ -1,14 +1,18 @@
 import projectList from "./projectlist.js";
 import projectName from "./projects.js";
 import todoItem from './todos.js';
+import storage from './storage.js';
 
 const uiController = () => {
   let mainProjectList = new projectList;
+  let appStorage = storage();
 
   const addDisplayProjectEvent = (project, element) => {
     element.addEventListener("click", function() {
-      project.currentIndex = target.dataset.index;
+      project.currentIndex = event.target.dataset.index;
+
       console.log(`event index: ${project.currentIndex}`);
+      console.log(this);
       displayTodos(project.list[project.currentIndex]);
     })
   }
@@ -76,16 +80,25 @@ const uiController = () => {
     const completeBool = document.querySelector('#complete-bool');
     const priorityLevel = document.querySelector('#priority-text');
     const notesText = document.querySelector('#notes-text');
+    const addProjectBtn = document.querySelector('#side-add-button');
+    const sideAddText = document.querySelector('#side-add-text');
 
-    //Creating initial todos and adding them to the initial list 'newList' and that project to the project list 'projectList'
-    const todo1 = new todoItem("Laundry", "Wash all the clothes", "04/26/2022", "3", "Separate the whites from the colors!", false);
-    const todo2 = new todoItem("Dishes", "Put dishes through the dishwasher", "04/24/2022", "4", "", true);
-    const todo3 = new todoItem("Trash", "Take out trash and recycling", "04/21/2022", "5", "Trash: grey can, Recycling: green can", false);
-    const todo4 = new todoItem("Floors", "Sweep and mop", "04/30/2022", "1", "", false);
+    // if (appStorage.storageAvailable('localStorage') && localStorage.getItem('mainProjectList')) {
+    //  mainProjectList = localStorage.getItem('mainProjectList');
+    //  console.log(JSON.stringify(mainProjectList, null, 2));
+    //  console.log(JSON.stringify(mainProjectList.list, null, 2));
+    //} else {
+      // Creating initial todos and adding them to the initial list 'newList' and that project to the project list 'projectList'
 
-    const newList = new projectName("To Do", false, 0, [todo1, todo2, todo3, todo4]);
+      const todo1 = new todoItem("Laundry", "Wash all the clothes", "04/26/2022", "3", "Separate the whites from the colors!", false);
+      const todo2 = new todoItem("Dishes", "Put dishes through the dishwasher", "04/24/2022", "4", "", true);
+      const todo3 = new todoItem("Trash", "Take out trash and recycling", "04/21/2022", "5", "Trash: grey can, Recycling: green can", false);
+      const todo4 = new todoItem("Floors", "Sweep and mop", "04/30/2022", "1", "", false);
 
-    mainProjectList.add(newList);
+      const newList = new projectName("To Do", false, 0, [todo1, todo2, todo3, todo4]);
+      
+      mainProjectList.add(newList);
+    //}
 
     addExtendBtn.addEventListener("click", function() {
       if (addText.classList.contains('add-text-container-extend')) {
@@ -100,9 +113,6 @@ const uiController = () => {
         addExtendBtn.innerHTML = "CANCEL";
       }
     })
-
-    const addProjectBtn = document.querySelector('#side-add-button');
-    const sideAddText = document.querySelector('#side-add-text');
 
     addProjectBtn.addEventListener("click", function() {
       if (sideAddText.value) {
@@ -120,14 +130,24 @@ const uiController = () => {
     addTodoBtn.addEventListener("click", function() {
       if (todoTitle && shortDescription && dueDate && notesText) {
         const newTodo = new todoItem(todoTitle.value, shortDescription.value, dueDate.value, completeBool.value, priorityLevel.value, notesText.value);
-        
-        mainProjectList.list[0].add(newTodo); // - start here to begin adding new todos to the current list
+        const cIndex = mainProjectList.list.length - 1;
+
+        mainProjectList.list[cIndex].addTodo(newTodo); // - start here to begin adding new todos to the current list
         console.log("added");
+        displayTodos(mainProjectList.list[cIndex]);
+        if (appStorage.storageAvailable('localStorage')) {
+          appStorage.populateStorage('mainProjectList', mainProjectList);
+          console.log("storage successful");
+        }
       }
     })
 
     displayProjects(mainProjectList);
+    //if (appStorage.storageAvailable('localStorage')) {
+    //  appStorage.populateStorage('mainProjectList', mainProjectList);
 
+    //  console.log("storage successful");
+    //}
     displayTodos(mainProjectList.list[0]);
   }
 

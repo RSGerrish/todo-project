@@ -38,7 +38,7 @@ body {
 
 header {
   display: flex;
-  background-color:darkseagreen;
+  background-color:#8fbc8f;
   padding: 0;
 }
 
@@ -76,7 +76,7 @@ header {
 /* Sidebar Styling */
 
 #sidebar {
-  background-color: lightsalmon;
+  background-color: #afcfaf;
   max-width: 450px;
   min-width: 300px;
   padding: 1rem;
@@ -128,6 +128,10 @@ header {
 .h2-title {
   font-size: 1.8rem;
   font-weight: 500;
+}
+
+.h2-title:hover {
+  background-color: #7fb27f;
 }
 
 /* Todo Body Styling */
